@@ -1,21 +1,23 @@
-import React from "react";
+import React from 'react';
 
-class Opciones extends React.Component {
+class Botones extends React.Component {
+
     render() {
-        const { actualizarOpciones, opcionActual } = this.props
+        const { actualizarOpciones, opcionActual: opcionSeleccionada } = this.props;
+
         return (
             <div className="opciones">
                 <div className="opcion">
-                    <button id="A" className="botones" onClick={(event) => actualizarOpciones(event.target.id)}>A</button>
-                    <h2>{opcionActual.opciones.a}</h2>
+                    <button id="A" className="botones" onClick={(e) => actualizarOpciones(e.target.id)}>A</button>
+                    <h2>{opcionSeleccionada.opciones.a}</h2>
                 </div>
                 <div className="opcion">
-                    <button id="B" className="botones" onClick={(event) => actualizarOpciones(event.target.id)}>B</button>
-                    <h2>{opcionActual.opciones.b}</h2>
+                    <button id="B" className="botones" onClick={(e) => actualizarOpciones(e.target.id)}>B</button>
+                    <h2>{opcionSeleccionada.opciones.b}</h2>
                 </div>
             </div>
         )
     }
 }
 
-export default Opciones;
+export default Botones;

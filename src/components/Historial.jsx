@@ -1,8 +1,11 @@
 import React from "react";
 
 class Historial extends React.Component {
+
     render() {
-        const { historial, opcionAnterior } = this.props
+
+        const { historial, opcionAnterior } = this.props;
+        
         return (
             <div className="recordatorio">
                 <h3>Selección anterior: {opcionAnterior}</h3>

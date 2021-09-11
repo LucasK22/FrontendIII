@@ -1,37 +1,40 @@
 import React from "react";
 import data from './data.json'
 import Historial from './Historial'
-import Opciones from './Botones'
+import Botones from './Botones'
 
-const arrayHistorial = [];
+let historialOpcionesElegidas = [];
 
 class Historia extends React.Component {
   constructor() {
     super();
     this.state = {
       opcion: data[0],
-      opcionAnterior: "",
+      seleccionAnterior: "",
       nivel: 2
     }
   }
 
   shouldComponentUpdate() {
     if (this.state.nivel > 5) {
-      alert('Has llegado al final del camino!')
+      alert('¡Has finalizado tu historia!')
       return false
     } else {
       return true
     }
   }
 
-  handleClick = (opcion) => {
+  handleClick = (opcionSeleccionada) => {
     this.setState({ nivel: this.state.nivel + 1 })
-    let id = this.state.nivel + opcion.toLowerCase();
-    let nuevaOpcion = data.find(camino => camino.id === id)
-    if (this.state.opcionAnterior) {
-      arrayHistorial.push(this.state.opcionAnterior)
+
+    let id = this.state.nivel + opcionSeleccionada.toLowerCase();
+    let nuevaOpcion = data.find(caminoActual => caminoActual.id === id)
+
+    if (this.state.seleccionAnterior) {
+      historialOpcionesElegidas= [...historialOpcionesElegidas, this.state.seleccionAnterior]
     }
-    this.setState({ opcion: nuevaOpcion, opcionAnterior: opcion })
+
+    this.setState({ opcion: nuevaOpcion, seleccionAnterior: opcionSeleccionada })
   }
 
   render() {
@@ -39,8 +42,8 @@ class Historia extends React.Component {
       <div className="App">
         <div className="layout">
           <h1 className="historia">{this.state.opcion.historia}</h1>
-          <Opciones actualizarOpciones={this.handleClick} opcionActual={this.state.opcion} />
-          <Historial historial={arrayHistorial} opcionAnterior={this.state.opcionAnterior} />
+          <Botones actualizarOpciones={this.handleClick} opcionActual={this.state.opcion} />
+          <Historial historial={historialOpcionesElegidas} opcionAnterior={this.state.seleccionAnterior} />
         </div>
       </div>
     );
